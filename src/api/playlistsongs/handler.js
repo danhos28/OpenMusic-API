@@ -1,4 +1,3 @@
-/* eslint-disable no-underscore-dangle */
 const ClientError = require('../../exceptions/ClientError');
 
 class PlaylistsongsHandler {
@@ -8,8 +7,7 @@ class PlaylistsongsHandler {
 
     this.postPlaylistsongHandler = this.postPlaylistsongHandler.bind(this);
     this.getPlaylistsongsHandler = this.getPlaylistsongsHandler.bind(this);
-    this.deletePlaylistsongByIdHandler =
-      this.deletePlaylistsongByIdHandler.bind(this);
+    this.deletePlaylistsongByIdHandler = this.deletePlaylistsongByIdHandler.bind(this);
   }
 
   async postPlaylistsongHandler(request, h) {

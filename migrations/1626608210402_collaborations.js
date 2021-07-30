@@ -1,9 +1,5 @@
-/* eslint-disable indent */
-/* eslint-disable linebreak-style */
-
 const { dropTable } = require('node-pg-migrate/dist/operations/tables');
 
-/* eslint-disable camelcase */
 exports.up = (pgm) => {
   pgm.createTable('collaborations', {
     id: {

@@ -7,20 +7,24 @@ class SongsService {
     this._songs = [];
   }
 
-  addSong({ title, year, performer, genre, duration }) {
+  addSong(
+    {
+      title, year, performer, genre, duration,
+    },
+  ) {
     const id = nanoid(16);
     const insertedAt = new Date().toISOString();
     const updatedAt = insertedAt;
-    year = parseInt(year);
-    duration = parseInt(duration);
+    const yearConvert = parseInt(year, 10);
+    const durationConvert = parseInt(duration, 10);
 
     const newSong = {
       id,
       title,
-      year,
+      yearConvert,
       performer,
       genre,
-      duration,
+      durationConvert,
       insertedAt,
       updatedAt,
     };
@@ -46,7 +50,7 @@ class SongsService {
   }
 
   getSongById(id) {
-    const song = this._songs.filter((song) => song.id === id)[0];
+    const song = this._songs.filter((music) => music.id === id)[0];
     if (!song) {
       throw new NotFoundError('Lagu tidak ditemukan');
     }
@@ -54,7 +58,9 @@ class SongsService {
     return song;
   }
 
-  editSongById(id, { title, year, performer, genre, duration }) {
+  editSongById(id, {
+    title, year, performer, genre, duration,
+  }) {
     const index = this._songs.findIndex((song) => song.id === id);
 
     if (index === -1) {
@@ -62,16 +68,16 @@ class SongsService {
     }
 
     const updatedAt = new Date().toISOString();
-    year = parseInt(year);
-    duration = parseInt(duration);
+    const yearConvert = parseInt(year, 10);
+    const durationConvert = parseInt(duration, 10);
 
     this._songs[index] = {
       ...this._songs[index],
       title,
-      year,
+      yearConvert,
       performer,
       genre,
-      duration,
+      durationConvert,
       updatedAt,
     };
   }

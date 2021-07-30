@@ -1,6 +1,3 @@
-/* eslint-disable indent */
-/* eslint-disable comma-dangle */
-/* eslint-disable max-len */
 const { Pool } = require('pg');
 const { nanoid } = require('nanoid');
 const InvariantError = require('../../exceptions/InvariantError');
@@ -11,7 +8,9 @@ class SongsService {
     this._pool = new Pool();
   }
 
-  async addSong({ title, year, performer, genre, duration }) {
+  async addSong({
+    title, year, performer, genre, duration,
+  }) {
     const id = `song-${nanoid(16)}`;
     const insertedAt = new Date(Date.now()).toISOString();
     const updatedAt = insertedAt;
@@ -40,7 +39,7 @@ class SongsService {
 
   async getSongs() {
     const result = await this._pool.query(
-      'SELECT id, title, performer FROM songs'
+      'SELECT id, title, performer FROM songs',
     );
     return result.rows;
   }
@@ -58,7 +57,9 @@ class SongsService {
     return result.rows[0];
   }
 
-  async editSongById(id, { title, year, performer, genre, duration }) {
+  async editSongById(id, {
+    title, year, performer, genre, duration,
+  }) {
     const updatedAt = new Date(Date.now()).toISOString();
     // year = parseInt(year);
     // duration = parseInt(duration);

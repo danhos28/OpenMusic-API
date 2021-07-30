@@ -1,6 +1,3 @@
-/* eslint-disable indent */
-/* eslint-disable comma-dangle */
-/* eslint-disable max-len */
 const ClientError = require('../../exceptions/ClientError');
 
 class CollaborationsHandler {
@@ -10,8 +7,7 @@ class CollaborationsHandler {
     this._validator = validator;
 
     this.postCollaborationHandler = this.postCollaborationHandler.bind(this);
-    this.deleteCollaborationHandler =
-      this.deleteCollaborationHandler.bind(this);
+    this.deleteCollaborationHandler = this.deleteCollaborationHandler.bind(this);
   }
 
   async postCollaborationHandler(request, h) {
@@ -22,8 +18,8 @@ class CollaborationsHandler {
 
       await this._playlistsongsService.verifyPlaylist(credentialId, playlistId);
 
-      const collaborationId =
-        await this._collaborationsService.addCollaboration(playlistId, userId);
+      const collaborationId = await
+      this._collaborationsService.addCollaboration(playlistId, userId);
 
       const response = h.response({
         status: 'success',

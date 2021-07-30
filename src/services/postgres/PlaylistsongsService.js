@@ -14,7 +14,7 @@ class PlaylistsongsService {
     const id = nanoid(16);
 
     const query = {
-      text: `INSERT INTO playlistsongs VALUES($1, $2, $3) RETURNING id`,
+      text: 'INSERT INTO playlistsongs VALUES($1, $2, $3) RETURNING id',
       values: [id, playlistId, songId],
     };
 
@@ -29,7 +29,7 @@ class PlaylistsongsService {
 
   async verifyPlaylist(owner, playlistId) {
     const query = {
-      text: `SELECT * FROM playlists WHERE id = $1`,
+      text: 'SELECT * FROM playlists WHERE id = $1',
       values: [playlistId],
     };
     const result = await this._pool.query(query);

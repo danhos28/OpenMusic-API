@@ -1,5 +1,3 @@
-/* eslint-disable comma-dangle */
-/* eslint-disable indent */
 const CollaborationsHandler = require('./handler');
 const routes = require('./routes');
 
@@ -8,12 +6,12 @@ module.exports = {
   version: '1.0.0',
   register: async (
     server,
-    { collaborationsService, playlistsongsService, validator }
+    { collaborationsService, playlistsongsService, validator },
   ) => {
     const collaborationsHandler = new CollaborationsHandler(
       collaborationsService,
       playlistsongsService,
-      validator
+      validator,
     );
 
     server.route(routes(collaborationsHandler));

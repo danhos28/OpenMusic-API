@@ -1,5 +1,3 @@
-/* eslint-disable linebreak-style */
-
 exports.up = (pgm) => {
   pgm.createTable('songs', {
     id: {

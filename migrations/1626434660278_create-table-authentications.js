@@ -1,5 +1,3 @@
-/* eslint-disable linebreak-style */
-/* eslint-disable camelcase */
 exports.up = (pgm) => {
   pgm.createTable('authentications', {
     token: {
