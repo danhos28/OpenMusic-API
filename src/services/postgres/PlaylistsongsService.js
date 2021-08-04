@@ -72,23 +72,25 @@ class PlaylistsongsService {
   }
 
   async getSongsFromPlaylist(playlistId) {
-    const query = {
-      text: `SELECT songs.id, songs.title, songs.performer FROM songs
+    try {
+      const result = await this._cacheService.get(`songs:${playlistId}`);
+      return JSON.parse(result);
+    } catch (error) {
+      const query = {
+        text: `SELECT songs.id, songs.title, songs.performer FROM songs
           LEFT JOIN playlistsongs ON playlistsongs.song_id = songs.id
           LEFT JOIN collaborations ON collaborations.playlist_id =
           playlistsongs.playlist_id
           WHERE playlistsongs.playlist_id = $1 OR
           collaborations.playlist_id = $1
           GROUP BY songs.id`,
-      values: [playlistId],
-    };
+        values: [playlistId],
+      };
 
-    const result = await this._pool.query(query);
-
-    // simpan lagu dalam cahce
-    await this._cacheService.set(`songs:${playlistId}`, JSON.stringify(result));
-
-    return result.rows;
+      const result = await this._pool.query(query);
+      await this._cacheService.set(`songs:${playlistId}`, JSON.stringify(result));
+      return result.rows;
+    }
   }
 
   async deleteSongFromPlaylist({ playlistId, songId }) {
